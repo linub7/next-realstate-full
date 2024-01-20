@@ -1,11 +1,17 @@
-import { Button } from 'antd';
+import { UserButton, currentUser } from '@clerk/nextjs';
 
-export default function Home() {
+export default async function Home() {
+  const loggedInUser = await currentUser();
+
+  const username =
+    loggedInUser?.username ||
+    `${loggedInUser?.firstName} ${loggedInUser?.lastName}`;
   return (
     <div className="p-20">
-      <h1>Home Page</h1>
-      <Button type="primary">Button</Button>
-      <Button type="default">Button</Button>
+      <UserButton afterSignOutUrl="/sign-in" signInUrl="/sign-in" />
+      <h1>Clerk user id: {loggedInUser?.id}</h1>
+      <h1>Username: {username}</h1>
+      <h1>Email: {loggedInUser?.emailAddresses[0]?.emailAddress}</h1>
     </div>
   );
 }
