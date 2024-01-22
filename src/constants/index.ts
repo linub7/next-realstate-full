@@ -49,3 +49,15 @@ export const PROPERTY_STATUSES = [
   { value: 'rent', label: 'Rent' },
   { value: 'sale', label: 'Sale' },
 ];
+
+export const CITIES = [
+  { value: 'tabriz', label: 'Tabriz' },
+  { value: 'tehran', label: 'Tehran' },
+  { value: 'karaj', label: 'Karaj' },
+  { value: 'urmia', label: 'Urmia' },
+  { value: 'ardabil', label: 'Ardabil' },
+  { value: 'zanjan', label: 'Zanjan' },
+  { value: 'isfahan', label: 'Isfahan' },
+  { value: 'shiraz', label: 'Shiraz' },
+  { value: 'ahwaz', label: 'Ahwaz' },
+];
