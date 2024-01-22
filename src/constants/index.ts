@@ -1,6 +1,6 @@
 export const COLOR_PRIMARY: string = '#1B4242';
 export const CONTROL_BUTTON_HEIGHT: number = 40;
-export const CONTROL_INPUT_HEIGHT: number = 45;
+export const CONTROL_INPUT_HEIGHT: number = 42;
 
 export const USER_MENU = [
   {
@@ -60,4 +60,27 @@ export const CITIES = [
   { value: 'isfahan', label: 'Isfahan' },
   { value: 'shiraz', label: 'Shiraz' },
   { value: 'ahwaz', label: 'Ahwaz' },
+];
+
+export const PARKING = [
+  { value: 'covered', label: 'Covered' },
+  { value: 'open', label: 'Open' },
+  { value: 'none', label: 'None' },
+];
+
+export const FURNISHED_STATUSES = [
+  { value: 'furnished', label: 'Furnished' },
+  { value: 'semi-furnished', label: 'Semi-Furnished' },
+  { value: 'unfurnished', label: 'Unfurnished' },
+];
+
+export const FACING = [
+  { value: 'east', label: 'East' },
+  { value: 'west', label: 'West' },
+  { value: 'north', label: 'North' },
+  { value: 'south', label: 'South' },
+  { value: 'north-east', label: 'North-East' },
+  { value: 'north-west', label: 'North-West' },
+  { value: 'south-east', label: 'South-East' },
+  { value: 'south-west', label: 'South-West' },
 ];
