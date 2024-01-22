@@ -35,3 +35,17 @@ export const ADMIN_MENU = [
     path: '/admin/users',
   },
 ];
+
+export const PROPERTY_TYPES = [
+  { value: 'house', label: 'House' },
+  { value: 'apartment', label: 'Apartment' },
+  { value: 'villa', label: 'Villa' },
+  { value: 'cottage', label: 'Cottage' },
+  { value: 'land', label: 'Land' },
+  { value: 'other', label: 'Other' },
+];
+
+export const PROPERTY_STATUSES = [
+  { value: 'rent', label: 'Rent' },
+  { value: 'sale', label: 'Sale' },
+];

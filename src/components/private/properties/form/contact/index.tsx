@@ -1,5 +1,5 @@
 import { PropertyFormStepProps } from '@/types';
-import BackNextButtons from '../back-next-buttons';
+import BackNextButtons from '../common/back-next-buttons';
 
 const PropertyFormContact = (props: PropertyFormStepProps) => {
   const { currentStep, finalValues, setCurrentStep, setFinalValues } = props;

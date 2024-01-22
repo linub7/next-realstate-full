@@ -8,7 +8,7 @@ interface Props {
 const BackNextButtons = (props: Props) => {
   const { currentStep, setCurrentStep } = props;
   return (
-    <div className="flex justify-end gap-2">
+    <div className="flex justify-end gap-2 mt-7">
       <Button
         disabled={currentStep === 0}
         type="default"
@@ -16,11 +16,7 @@ const BackNextButtons = (props: Props) => {
       >
         Back
       </Button>
-      <Button
-        disabled={currentStep === 4}
-        type="primary"
-        onClick={() => setCurrentStep(currentStep + 1)}
-      >
+      <Button htmlType="submit" disabled={currentStep === 4} type="primary">
         Next
       </Button>
     </div>

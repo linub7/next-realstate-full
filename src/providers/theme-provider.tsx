@@ -33,6 +33,16 @@ const ThemeProvider = (props: Props) => {
               boxShadow: 'none',
               activeShadow: 'none',
             },
+            InputNumber: {
+              controlHeight: CONTROL_INPUT_HEIGHT,
+              boxShadow: 'none',
+              activeShadow: 'none',
+            },
+            Select: {
+              controlHeight: CONTROL_INPUT_HEIGHT,
+              boxShadow: 'none',
+              controlOutline: 'none',
+            },
           },
         }}
       >

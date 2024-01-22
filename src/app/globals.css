@@ -16,10 +16,20 @@ body {
   font-weight: 500 !important;
 }
 
+// elements
+input {
+  width: 100% !important;
+}
+
+// classes
 .cl-internal-b3fm6y {
   display: none !important;
 }
 
 .font-bold {
   font-weight: 700 !important;
+}
+
+.ant-form-item {
+  margin-bottom: 5px !important;
 }
