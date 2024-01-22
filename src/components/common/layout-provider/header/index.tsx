@@ -45,7 +45,7 @@ const LayoutProviderHeader = (props: Props) => {
   };
 
   return (
-    <div className="lg:px-5 px-20">
+    <div className="lg:px-20 px-5">
       <div className="bg-primary p-3 flex justify-between items-center rounded-b">
         <Link href={'/'} className="text-2xl text-white font-bold no-underline">
           Linuxxii
@@ -66,7 +66,7 @@ const LayoutProviderHeader = (props: Props) => {
               {currentUserData?.username}
             </Button>
           </Dropdown>
-          <UserButton afterSignOutUrl="/sign-in" />
+          <UserButton afterSignOutUrl="/sign-in" signInUrl="/sign-in" />
         </div>
       </div>
     </div>
