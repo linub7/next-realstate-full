@@ -84,3 +84,8 @@ export const FACING = [
   { value: 'south-east', label: 'South-East' },
   { value: 'south-west', label: 'South-West' },
 ];
+
+export const SHOW_OWNER_DETAILS = [
+  { value: true, label: 'Yes' },
+  { value: false, label: 'No' },
+];

@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { Steps } from 'antd';
 
 import PropertyFormBasic from './basic';
@@ -17,15 +17,12 @@ const PropertyForm = (props: Props) => {
     basic: {},
     location: {},
     amenities: {},
-    media: {},
+    media: {
+      newlyUploadedFiles: [],
+      images: [],
+    },
     contact: {},
   });
-
-  useEffect(() => {
-    console.log(finalValues);
-
-    return () => {};
-  }, [finalValues]);
 
   const commonPropsForSteps = {
     currentStep,

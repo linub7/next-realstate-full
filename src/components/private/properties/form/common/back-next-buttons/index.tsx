@@ -2,11 +2,12 @@ import { Button } from 'antd';
 
 interface Props {
   currentStep: number;
+  loading?: boolean;
   setCurrentStep: (currentStep: number) => void;
 }
 
 const BackNextButtons = (props: Props) => {
-  const { currentStep, setCurrentStep } = props;
+  const { currentStep, setCurrentStep, loading = false } = props;
   return (
     <div className="flex justify-end gap-2 mt-7">
       <Button
@@ -16,9 +17,15 @@ const BackNextButtons = (props: Props) => {
       >
         Back
       </Button>
-      <Button htmlType="submit" disabled={currentStep === 4} type="primary">
-        Next
-      </Button>
+      {currentStep === 4 ? (
+        <Button htmlType="submit" type="primary" loading={loading}>
+          Save Property
+        </Button>
+      ) : (
+        <Button htmlType="submit" type="primary">
+          Next
+        </Button>
+      )}
     </div>
   );
 };
