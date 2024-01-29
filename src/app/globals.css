@@ -21,6 +21,11 @@ input {
   width: 100% !important;
 }
 
+table {
+  border: 1px solid #b5b5b5 !important;
+  margin-top: 10px !important;
+}
+
 // classes
 .cl-internal-b3fm6y {
   display: none !important;

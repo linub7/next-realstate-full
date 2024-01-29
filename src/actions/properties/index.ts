@@ -20,3 +20,68 @@ export const AddProperty = async (property: any) => {
     };
   }
 };
+
+export const GetAllProperties = async () => {
+  try {
+    const properties = await prisma.property.findMany({
+      orderBy: {
+        updatedAt: 'desc',
+      },
+    });
+    return {
+      status: 'success',
+      data: properties,
+    };
+  } catch (error: any) {
+    return {
+      error: error?.message,
+    };
+  }
+};
+
+export const GetSingleProperty = async (propertyId: string) => {
+  try {
+    const property = await prisma.property.findUnique({
+      where: {
+        id: propertyId,
+      },
+    });
+    return {
+      status: 'success',
+      data: property,
+    };
+  } catch (error: any) {
+    return {
+      error: error?.message,
+    };
+  }
+};
+
+export const EditProperty = async (propertyId: string, property: any) => {
+  try {
+    await prisma.property.update({ where: { id: propertyId }, data: property });
+    revalidatePath(`/user/properties`);
+    return {
+      status: 'success',
+      data: property,
+    };
+  } catch (error: any) {
+    return {
+      error: error?.message,
+    };
+  }
+};
+
+export const DeleteProperty = async (propertyId: string) => {
+  try {
+    await prisma.property.delete({ where: { id: propertyId } });
+    revalidatePath(`/user/properties`);
+    return {
+      status: 'success',
+    };
+  } catch (error: any) {
+    return {
+      error: error?.message,
+    };
+  }
+};

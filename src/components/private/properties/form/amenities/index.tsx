@@ -14,7 +14,7 @@ const PropertyFormAmenities = (props: PropertyFormStepProps) => {
   return (
     <Form
       layout="vertical"
-      initialValues={finalValues?.location}
+      initialValues={finalValues?.amenities}
       onFinish={handleFinish}
     >
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-5">

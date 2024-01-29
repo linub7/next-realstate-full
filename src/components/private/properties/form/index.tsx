@@ -9,19 +9,24 @@ import PropertyFormAmenities from './amenities';
 import PropertyFormMedia from './media';
 import PropertyFormContact from './contact';
 
-interface Props {}
+interface Props {
+  initialValues?: any;
+  isEdit?: boolean;
+}
 
 const PropertyForm = (props: Props) => {
+  const { initialValues = {}, isEdit = false } = props;
+
   const [currentStep, setCurrentStep] = useState(0);
   const [finalValues, setFinalValues] = useState({
-    basic: {},
-    location: {},
-    amenities: {},
+    basic: initialValues,
+    location: initialValues,
+    amenities: initialValues,
     media: {
       newlyUploadedFiles: [],
-      images: [],
+      images: initialValues?.media || [],
     },
-    contact: {},
+    contact: initialValues,
   });
 
   const commonPropsForSteps = {
@@ -29,6 +34,7 @@ const PropertyForm = (props: Props) => {
     finalValues,
     setCurrentStep,
     setFinalValues,
+    isEdit,
   };
 
   const CREATE_PROPERTY_STEPS = [

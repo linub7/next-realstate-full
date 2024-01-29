@@ -2,17 +2,24 @@
 
 import { useState } from 'react';
 import { Button, Form, Input, InputNumber, Select, message } from 'antd';
-import { useRouter } from 'next/navigation';
+import { useRouter, useParams } from 'next/navigation';
 
 import { PropertyFormStepProps } from '@/types';
 import BackNextButtons from '../common/back-next-buttons';
 import PropertyFormItem from '../common/form-item';
 import { SHOW_OWNER_DETAILS } from '@/constants';
 import { uploadMultipleFiles } from '@/utils/uploadMultipleFiles';
-import { AddProperty } from '@/actions/properties';
+import { AddProperty, EditProperty } from '@/actions/properties';
 
 const PropertyFormContact = (props: PropertyFormStepProps) => {
-  const { currentStep, finalValues, setCurrentStep, setFinalValues } = props;
+  const {
+    currentStep,
+    finalValues,
+    setCurrentStep,
+    setFinalValues,
+    isEdit = false,
+  } = props;
+  const { id } = useParams();
   const [images, setImages] = useState<any[]>([]);
   const [loading, setLoading] = useState(false);
   const [isShowButton, setIsShowButton] = useState(true);
@@ -45,7 +52,7 @@ const PropertyFormContact = (props: PropertyFormStepProps) => {
     });
     setIsShowButton(false);
   };
-  const handleFinish = async (values: any) => {
+  const handleFinishCreate = async (values: any) => {
     let tempFinalValues = { ...finalValues, contact: values };
     if (!images || images?.length < 1)
       return window.alert('OOPS! Please upload images first!');
@@ -70,12 +77,47 @@ const PropertyFormContact = (props: PropertyFormStepProps) => {
       setLoading(false);
     }
   };
+  const handleFinishEdit = async (values: any) => {
+    let tempFinalValues = { ...finalValues, contact: values };
+    let imagesUrls: any[] = [];
+    if (isEdit && finalValues?.media?.newlyUploadedFiles?.length > 0) {
+      if (!images || images?.length < 1)
+        return window.alert('OOPS! Please upload images first!');
+      imagesUrls = await uploadMultipleFiles(images);
+    }
+
+    try {
+      setLoading(true);
+      const payload = {
+        ...tempFinalValues.basic,
+        ...tempFinalValues.location,
+        ...tempFinalValues.amenities,
+        ...tempFinalValues.contact,
+        media:
+          isEdit && finalValues?.media?.newlyUploadedFiles?.length > 0
+            ? [...tempFinalValues?.media?.images, ...imagesUrls]
+            : tempFinalValues?.media?.images,
+      };
+      const res = await EditProperty(
+        typeof id === 'string' ? id : id[0],
+        payload
+      );
+      if (res.error) throw new Error(res.error);
+      message.success('Property Edited successfully!');
+      router.push('/user/properties');
+    } catch (error: any) {
+      console.log(error);
+      message.error(error?.message);
+    } finally {
+      setLoading(false);
+    }
+  };
 
   return (
     <Form
       layout="vertical"
       initialValues={finalValues?.contact}
-      onFinish={handleFinish}
+      onFinish={isEdit ? handleFinishEdit : handleFinishCreate}
     >
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-5">
         <PropertyFormItem
@@ -131,13 +173,21 @@ const PropertyFormContact = (props: PropertyFormStepProps) => {
           <Select options={SHOW_OWNER_DETAILS} />
         </PropertyFormItem>
       </div>
-      {isShowButton && (
+      {isShowButton && !isEdit ? (
         <div className="flex justify-end gap-2 mt-7">
           <Button type="default" onClick={handleImageUpload}>
             Upload Images
           </Button>
         </div>
-      )}
+      ) : isEdit &&
+        finalValues?.media?.newlyUploadedFiles?.length > 0 &&
+        images?.length < 1 ? (
+        <div className="flex justify-end gap-2 mt-7">
+          <Button type="default" onClick={handleImageUpload}>
+            Upload Images
+          </Button>
+        </div>
+      ) : null}
       <BackNextButtons
         currentStep={currentStep}
         loading={loading}
