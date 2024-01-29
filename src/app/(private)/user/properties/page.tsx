@@ -3,7 +3,7 @@ import { Suspense } from 'react';
 import LinkButton from '@/components/common/buttons/link';
 import CommonLoader from '@/components/common/loader';
 import PageTitle from '@/components/common/page-title';
-import PropertiesFilters from '@/components/private/properties/filters';
+import PropertiesFilters from '@/components/private/filters';
 import PropertiesTable from '@/components/private/properties/table';
 
 interface Props {}

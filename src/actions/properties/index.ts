@@ -39,6 +39,28 @@ export const GetAllProperties = async () => {
   }
 };
 
+export const GetAllMyProperties = async () => {
+  try {
+    const user: any = await GetCurrentUserFromMongoDb();
+    const properties = await prisma.property.findMany({
+      where: {
+        userId: user?.data?.id,
+      },
+      orderBy: {
+        updatedAt: 'desc',
+      },
+    });
+    return {
+      status: 'success',
+      data: properties,
+    };
+  } catch (error: any) {
+    return {
+      error: error?.message,
+    };
+  }
+};
+
 export const GetSingleProperty = async (propertyId: string) => {
   try {
     const property = await prisma.property.findUnique({
