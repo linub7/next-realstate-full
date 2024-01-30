@@ -8,7 +8,7 @@ interface Props {
 const LinkButton = (props: Props) => {
   const { btnTitle, path } = props;
   return (
-    <div className="border border-solid rounded-sm px-3 py-2 border-primary">
+    <div className="border border-solid rounded-sm px-3 py-2 border-primary w-fit">
       <Link href={path} className="no-underline text-primary">
         {btnTitle}
       </Link>
