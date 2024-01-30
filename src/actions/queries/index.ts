@@ -19,3 +19,50 @@ export const AddQuery = async (query: any) => {
     };
   }
 };
+
+export const GetAllMyQueries = async () => {
+  try {
+    const user: any = await GetCurrentUserFromMongoDb();
+    const userId = user?.data?.id;
+    const queries = await prisma.query.findMany({
+      where: {
+        userId,
+      },
+      include: {
+        property: true,
+      },
+    });
+    return {
+      status: 'success',
+      data: queries,
+    };
+  } catch (error: any) {
+    return {
+      error: error?.message,
+    };
+  }
+};
+
+export const GetSingleQueryByPropertyId = async (propertyId: string) => {
+  try {
+    const user: any = await GetCurrentUserFromMongoDb();
+    const userId = user?.data?.id;
+    const queries = await prisma.query.findMany({
+      where: {
+        userId,
+        propertyId,
+      },
+      orderBy: {
+        createdAt: 'desc',
+      },
+    });
+    return {
+      status: 'success',
+      data: queries,
+    };
+  } catch (error: any) {
+    return {
+      error: error?.message,
+    };
+  }
+};

@@ -7,6 +7,8 @@ import { Button, Table, message } from 'antd';
 import type { Property } from '@prisma/client';
 import { DeleteProperty } from '@/actions/properties';
 import { destroyImageFromCloudinary } from '@/helpers/imageUpload';
+import { DAYJS_FORMAT } from '@/constants';
+import PropertiesTableClientSidePropertyQueries from './property-queries';
 
 interface Props {
   properties: Property[];
@@ -15,6 +17,10 @@ interface Props {
 const PropertiesTableClientSide = (props: Props) => {
   const { properties } = props;
   const [loading, setLoading] = useState(false);
+  const [isShowQueries, setIsShowQueries] = useState(false);
+  const [selectedProperty, setSelectedProperty] = useState<Property | null>(
+    null
+  );
   const router = useRouter();
 
   const handleDeleteProperty = async (record: Property) => {
@@ -35,6 +41,11 @@ const PropertiesTableClientSide = (props: Props) => {
     }
   };
 
+  const handleClickQueries = (record: Property) => {
+    setSelectedProperty(record);
+    setIsShowQueries(true);
+  };
+
   const PROPERTY_COLUMNS = [
     { title: 'Name', dataIndex: 'name', key: 'name' },
     {
@@ -52,7 +63,7 @@ const PropertiesTableClientSide = (props: Props) => {
       dataIndex: 'updatedAt',
       key: 'updatedAt',
       render(updatedAt: Date) {
-        return dayjs(updatedAt).format('DD MMM YYYY HH:mm A');
+        return dayjs(updatedAt).format(DAYJS_FORMAT);
       },
     },
     {
@@ -62,6 +73,9 @@ const PropertiesTableClientSide = (props: Props) => {
       render(value: any, record: Property) {
         return (
           <div className="flex gap-5 items-center">
+            <Button size="small" onClick={() => handleClickQueries(record)}>
+              Queries
+            </Button>
             <Button size="small" onClick={() => handleDeleteProperty(record)}>
               <i className="ri-delete-bin-line"></i>
             </Button>
@@ -95,7 +109,15 @@ const PropertiesTableClientSide = (props: Props) => {
         dataSource={properties}
         columns={PROPERTY_COLUMNS}
         loading={loading}
+        rowKey={({ id }) => id}
       />
+      {isShowQueries && (
+        <PropertiesTableClientSidePropertyQueries
+          selectedProperty={selectedProperty}
+          isShowQueriesModal={isShowQueries}
+          setIsShowQueriesModal={setIsShowQueries}
+        />
+      )}
     </div>
   );
 };

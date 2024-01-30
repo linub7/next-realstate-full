@@ -19,6 +19,10 @@ export const USER_MENU = [
     name: 'Subscriptions',
     path: '/user/subscriptions',
   },
+  {
+    name: 'Queries',
+    path: '/user/queries',
+  },
 ];
 
 export const ADMIN_MENU = [
@@ -89,3 +93,5 @@ export const SHOW_OWNER_DETAILS = [
   { value: true, label: 'Yes' },
   { value: false, label: 'No' },
 ];
+
+export const DAYJS_FORMAT: string = 'DD MMM YYYY HH:mm A';
