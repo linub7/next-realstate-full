@@ -11,7 +11,7 @@ const BackNextButtons = (props: Props) => {
   return (
     <div className="flex justify-end gap-2 mt-7">
       <Button
-        disabled={currentStep === 0}
+        disabled={currentStep === 0 || loading}
         type="default"
         onClick={() => setCurrentStep(currentStep - 1)}
       >

@@ -27,6 +27,7 @@ model User {
   createdAt   DateTime   @default(now())
   updatedAt   DateTime   @updatedAt
   Property    Property[]
+  Query       Query[]
 }
 
 // property model
@@ -57,6 +58,24 @@ model Property {
   ownerPhone       Int
   ownerEmail       String
   showOwnerContact Boolean @default(false)
+  isActive         Boolean @default(true)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  Query     Query[]
+}
+
+// query model
+model Query {
+  id          String   @id @default(cuid()) @map("_id")
+  userId      String
+  user        User     @relation(fields: [userId], references: [id])
+  propertyId  String
+  property    Property @relation(fields: [propertyId], references: [id])
+  name        String
+  quoteAmount Float
+  message     String
+  phoneNumber Int
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt

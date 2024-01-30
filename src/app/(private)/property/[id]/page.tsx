@@ -2,6 +2,7 @@ import { GetSingleProperty } from '@/actions/properties';
 import LinkButton from '@/components/common/buttons/link';
 import PropertyImageCarousel from '@/components/private/property/image-carousel';
 import PropertyPageInfo from '@/components/private/property/info';
+import PropertyPageQueryModal from '@/components/private/property/query-modal';
 
 interface Props {
   params: {
@@ -24,12 +25,16 @@ const PropertyPage = async (props: Props) => {
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-10">
         <div className="col-span-2">
           <PropertyImageCarousel images={response?.data?.media!} />
+          <h1 className="text-2xl font-bold text-gray-700 mt-7">
+            ${response?.data?.price} / {response?.data?.status}
+          </h1>
           <p className="text-sm text-gray-600 mt-7">
             {response?.data?.description}
           </p>
         </div>
         <div className="border border-solid border-gray-400 rounded p-5">
           <PropertyPageInfo property={response?.data!} />
+          <PropertyPageQueryModal propertyId={response?.data?.id!} />
         </div>
       </div>
     </div>
