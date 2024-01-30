@@ -61,6 +61,25 @@ export const GetAllMyProperties = async () => {
   }
 };
 
+export const GetAllMyPropertiesCount = async () => {
+  try {
+    const user: any = await GetCurrentUserFromMongoDb();
+    const propertiesCount = await prisma.property.count({
+      where: {
+        userId: user?.data?.id,
+      },
+    });
+    return {
+      status: 'success',
+      data: propertiesCount,
+    };
+  } catch (error: any) {
+    return {
+      error: error?.message,
+    };
+  }
+};
+
 export const GetSingleProperty = async (propertyId: string) => {
   try {
     const property = await prisma.property.findUnique({

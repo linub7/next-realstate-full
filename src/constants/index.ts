@@ -1,3 +1,5 @@
+import { SubscriptionPlan } from '@/types';
+
 export const COLOR_PRIMARY: string = '#1B4242';
 export const CONTROL_BUTTON_HEIGHT: number = 40;
 export const CONTROL_INPUT_HEIGHT: number = 42;
@@ -95,3 +97,54 @@ export const SHOW_OWNER_DETAILS = [
 ];
 
 export const DAYJS_FORMAT: string = 'DD MMM YYYY HH:mm A';
+
+export const SUBSCRIPTIONS_PLANS: SubscriptionPlan[] = [
+  {
+    name: 'Basic',
+    price: 0,
+    propertiesLimit: 3,
+    imagesPerPropertyLimit: 3,
+    features: [
+      'Free for Lifetime',
+      'Property Listing',
+      'Property Details',
+      '3 Images per Property',
+      '3 Properties Limit',
+      'Property Search',
+    ],
+  },
+  {
+    name: 'Standard',
+    price: 10,
+    propertiesLimit: 10,
+    imagesPerPropertyLimit: 5,
+    features: [
+      'Free for Lifetime',
+      'Property Listing',
+      'Property Details',
+      '5 Images per Property',
+      '10 Properties Limit',
+      'Property Search',
+      'AI Support',
+      '24/7 Support on Email',
+    ],
+  },
+  {
+    name: 'Premium',
+    price: 25,
+    propertiesLimit: 100,
+    imagesPerPropertyLimit: 15,
+    features: [
+      'Free for Lifetime',
+      'Property Listing',
+      'Property Details',
+      '15 Images per Property',
+      '100 Properties Limit',
+      'Property Search',
+      'AI Support',
+      '24/7 Support on Email',
+      '24/7 Support on Phone',
+      'Personal Account Manager',
+    ],
+  },
+];

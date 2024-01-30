@@ -10,3 +10,11 @@ export interface UploadedImageToCloudinaryType {
   url: string;
   public_id: string;
 }
+
+export interface SubscriptionPlan {
+  name: string;
+  price: number;
+  propertiesLimit: number;
+  imagesPerPropertyLimit: number;
+  features: string[];
+}
