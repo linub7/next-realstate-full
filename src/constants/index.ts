@@ -17,10 +17,10 @@ export const USER_MENU = [
     name: 'Account',
     path: '/user/account',
   },
-  {
-    name: 'Subscriptions',
-    path: '/user/subscriptions',
-  },
+  // {
+  //   name: 'Subscriptions',
+  //   path: '/user/subscriptions',
+  // },
   {
     name: 'Queries',
     path: '/user/queries',
