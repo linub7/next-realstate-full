@@ -25,7 +25,6 @@ const BuySubscription = (props: Props) => {
     try {
       setIsLoading(true);
       const response = await GetStripeClientSecret(plan?.price);
-      console.log(response);
       if (response?.error) throw new Error(response?.error);
       setClientSecret(response?.data!);
     } catch (error: any) {

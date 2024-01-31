@@ -56,10 +56,10 @@ const UserAccountPage = async (props: Props) => {
         </div>
       </div>
 
-      <div className="flex flex-col gap-5 mt-10">
+      {/* <div className="flex flex-col gap-5 mt-10">
         <SectionTitle title="Subscription Details" />
         <span>ToDo ...</span>
-      </div>
+      </div> */}
     </div>
   );
 };

@@ -3,6 +3,7 @@ import { revalidatePath } from 'next/cache';
 
 import prisma from '@/config/db';
 import { GetCurrentUserFromMongoDb } from '../users';
+import { FilterSearchParam } from '@/types';
 
 export const AddProperty = async (property: any) => {
   try {
@@ -21,9 +22,17 @@ export const AddProperty = async (property: any) => {
   }
 };
 
-export const GetAllProperties = async () => {
+export const GetAllProperties = async (searchParams: FilterSearchParam) => {
   try {
+    const payload = {
+      ...searchParams,
+      age:
+        searchParams?.age !== undefined
+          ? parseInt(searchParams?.age)
+          : undefined,
+    };
     const properties = await prisma.property.findMany({
+      where: payload,
       orderBy: {
         updatedAt: 'desc',
       },
@@ -39,12 +48,20 @@ export const GetAllProperties = async () => {
   }
 };
 
-export const GetAllMyProperties = async () => {
+export const GetAllMyProperties = async (searchParams: FilterSearchParam) => {
   try {
     const user: any = await GetCurrentUserFromMongoDb();
+    const payload = {
+      ...searchParams,
+      age:
+        searchParams?.age !== undefined
+          ? parseInt(searchParams?.age)
+          : undefined,
+    };
     const properties = await prisma.property.findMany({
       where: {
         userId: user?.data?.id,
+        ...payload,
       },
       orderBy: {
         updatedAt: 'desc',

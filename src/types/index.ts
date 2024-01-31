@@ -18,3 +18,12 @@ export interface SubscriptionPlan {
   imagesPerPropertyLimit: number;
   features: string[];
 }
+
+export interface FilterSearchParam {
+  type: string;
+  status: string;
+  city: string;
+  furnished: string;
+  age: string;
+  parking: string;
+}

@@ -3,6 +3,7 @@
 import { Dispatch, SetStateAction, useEffect, useState } from 'react';
 import { Modal, Table, message } from 'antd';
 import dayjs from 'dayjs';
+import type { TableColumnsType } from 'antd';
 
 import type { Property, Query } from '@prisma/client';
 import { GetSingleQueryByPropertyId } from '@/actions/queries';
@@ -27,7 +28,7 @@ const PropertiesTableClientSidePropertyQueries = (props: Props) => {
     };
   }, [selectedProperty]);
 
-  const QUERY_COLUMN = [
+  const QUERY_COLUMN: TableColumnsType<Query> = [
     {
       key: '1',
       title: 'Customer Name',
@@ -48,6 +49,7 @@ const PropertiesTableClientSidePropertyQueries = (props: Props) => {
       key: '4',
       title: 'Message',
       dataIndex: 'message',
+      responsive: ['lg'],
     },
     {
       key: '5',

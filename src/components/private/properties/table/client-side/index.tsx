@@ -3,6 +3,7 @@ import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 import dayjs from 'dayjs';
 import { Button, Table, message } from 'antd';
+import type { TableColumnsType } from 'antd';
 
 import type { Property } from '@prisma/client';
 import { DeleteProperty } from '@/actions/properties';
@@ -46,22 +47,24 @@ const PropertiesTableClientSide = (props: Props) => {
     setIsShowQueries(true);
   };
 
-  const PROPERTY_COLUMNS = [
+  const PROPERTY_COLUMNS: TableColumnsType<Property> = [
     { title: 'Name', dataIndex: 'name', key: 'name' },
     {
       title: 'Price',
       dataIndex: 'price',
       key: 'price',
+      responsive: ['sm'],
       render(price: number) {
         return `$${price}`;
       },
     },
-    { title: 'Type', dataIndex: 'type', key: 'type' },
-    { title: 'Status', dataIndex: 'status', key: 'status' },
+    { title: 'Type', dataIndex: 'type', key: 'type', responsive: ['lg'] },
+    { title: 'Status', dataIndex: 'status', key: 'status', responsive: ['md'] },
     {
       title: 'Updated At',
       dataIndex: 'updatedAt',
       key: 'updatedAt',
+      responsive: ['lg'],
       render(updatedAt: Date) {
         return dayjs(updatedAt).format(DAYJS_FORMAT);
       },
