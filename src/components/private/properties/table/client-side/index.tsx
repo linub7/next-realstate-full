@@ -13,10 +13,11 @@ import PropertiesTableClientSidePropertyQueries from './property-queries';
 
 interface Props {
   properties: Property[];
+  isAdmin?: boolean;
 }
 
 const PropertiesTableClientSide = (props: Props) => {
-  const { properties } = props;
+  const { properties, isAdmin = false } = props;
   const [loading, setLoading] = useState(false);
   const [isShowQueries, setIsShowQueries] = useState(false);
   const [selectedProperty, setSelectedProperty] = useState<Property | null>(
@@ -105,6 +106,18 @@ const PropertiesTableClientSide = (props: Props) => {
       },
     },
   ];
+
+  if (isAdmin) {
+    PROPERTY_COLUMNS.unshift({
+      title: 'User',
+      dataIndex: 'user',
+      key: 'user',
+      responsive: ['lg'],
+      render(value: any, record: any) {
+        return <div className="flex gap-5">{record?.user?.username}</div>;
+      },
+    });
+  }
 
   return (
     <div className="capitalize">

@@ -48,7 +48,10 @@ export const GetAllProperties = async (searchParams: FilterSearchParam) => {
   }
 };
 
-export const GetAllMyProperties = async (searchParams: FilterSearchParam) => {
+export const GetAllMyOrAdminProperties = async (
+  searchParams: FilterSearchParam,
+  isAdmin: boolean
+) => {
   try {
     const user: any = await GetCurrentUserFromMongoDb();
     const payload = {
@@ -58,13 +61,20 @@ export const GetAllMyProperties = async (searchParams: FilterSearchParam) => {
           ? parseInt(searchParams?.age)
           : undefined,
     };
+
+    const whereCondition = isAdmin
+      ? { ...payload }
+      : {
+          userId: user?.data?.id,
+          ...payload,
+        };
     const properties = await prisma.property.findMany({
-      where: {
-        userId: user?.data?.id,
-        ...payload,
-      },
+      where: whereCondition,
       orderBy: {
         updatedAt: 'desc',
+      },
+      include: {
+        user: true,
       },
     });
     return {

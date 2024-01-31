@@ -1,48 +1,21 @@
 'use client';
 
-import { useEffect, useState } from 'react';
 import { UserButton } from '@clerk/nextjs';
 import { Button, Dropdown, message } from 'antd';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
-import { User } from '@prisma/client';
 
-import { GetCurrentUserFromMongoDb } from '@/actions/users';
-import { ADMIN_MENU, USER_MENU } from '@/constants';
+import type { User } from '@prisma/client';
 
 interface Props {
-  isPubicRoute: boolean;
-  setIsLoading: (state: boolean) => void;
+  menuToShow: { name: string; path: string }[];
+  currentUserData: User | null;
 }
 
 const LayoutProviderHeader = (props: Props) => {
-  const { isPubicRoute, setIsLoading } = props;
-  const [menuToShow, setMenuToShow] = useState(USER_MENU);
-  const [currentUserData, setCurrentUserData] = useState<User | null>(null);
+  const { currentUserData, menuToShow } = props;
 
   const router = useRouter();
-
-  useEffect(() => {
-    if (!isPubicRoute) getCurrentUser();
-
-    return () => {};
-  }, [isPubicRoute]);
-
-  const getCurrentUser = async () => {
-    try {
-      setIsLoading(true);
-      const response: any = await GetCurrentUserFromMongoDb();
-      if (response?.error) throw new Error(response?.error?.message);
-      setCurrentUserData(response?.data);
-      if (response?.data?.isAdmin) {
-        setMenuToShow(ADMIN_MENU);
-      }
-    } catch (error: any) {
-      message.error(error?.message);
-    } finally {
-      setIsLoading(false);
-    }
-  };
 
   return (
     <div className="lg:px-20 px-5">
